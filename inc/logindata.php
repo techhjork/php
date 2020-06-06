@@ -20,14 +20,13 @@ if($row<1){
    session_start();
      $_SESSION['user'] = $data['user'];
 
-     echo  $_SESSION['user'];
+     echo  htmlspecialchars($_SESSION['user']);
 }
 }
-function filter_data($data){
- $data = htmlspecialchars($data);
- $data = stripslashes($data);
- $data = trim($data);
- return $data;
+function filter_data($data){ // not for numeric!
+ global $con;
+ $safe_string = mysqli_real_escape_string($con, $data);
+ return $safe_string;
 }
 
 ?>
